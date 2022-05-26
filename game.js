@@ -1,32 +1,32 @@
 var count = 1;
 
-function fill(control) {
+function fill(control) {                                               //it has all control of game
     if (checkWin()) {
         alert("Winner");
         reset();
     } else {
-        if (count <= 9) {
-            if (count % 2 != 0) {
+        if (count <= 9) {                                              //we have 9 tile  and take alternate X and 0 for tile
+            if (count % 2 != 0) {                                      //check if tile is even then put X
                 document.getElementById(control.id).innerHTML = "X";
-            } else {
+            } else {                                                   //tile is odd put 0
                 document.getElementById(control.id).innerHTML = "0";
             }
-            count++;
+            count++;                                                   //every click count is increase till 9
         } else {
-            alert("match draw");
-            reset();
+            alert("match draw");                                       //no match found then match is declare draw
+            reset();                                                   //reset the game
         }
     }
 }
 
 function reset() {
-    for (var i = 1; i <= 9; i++) {
+    for (var i = 1; i <= 9; i++) {                                     //count reaches to 9, clear all tile
         document.getElementById("tile" + i).innerHTML = "";
     }
-    count = 1;
+    count = 1;                                                         //count start with one
 }
 
-function checkWin() {
+function checkWin() {                                                  //check all the possible winning condition
     if (
         checkCondition("tile1", "tile2", "tile3") ||
         checkCondition("tile4", "tile5", "tile6") ||
@@ -41,11 +41,11 @@ function checkWin() {
     }
 }
 
-function checkCondition(tile1, tile2, tile3) {
+function checkCondition(tile1, tile2, tile3) {                         //the logic part
     if (
         getData(tile1) != "" &&
         getData(tile2) != "" &&
-        getData(tile3) &&
+        getData(tile3) != "" &&
         getData(tile1) == getData(tile2) &&
         getData(tile2) == getData(tile3)
     ) {
@@ -54,5 +54,5 @@ function checkCondition(tile1, tile2, tile3) {
 }
 
 function getData(tile) {
-    return document.getElementById(tile).innerHTML;
+    return document.getElementById(tile).innerHTML;                    //return the value in tile
 }
